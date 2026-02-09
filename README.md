@@ -30,7 +30,9 @@
    ```
 
 4. **发布**  
-   把本仓库用 GitHub 连接到 [Netlify](https://www.netlify.com/)，在 Netlify 中配置构建命令（例如 `npm run build && npx next export`）和发布目录 `out`，**push 到 main 即自动构建并发布**，无需在项目里写部署脚本。
+   - 本地在 **Node.js >= 20.9.0** 的环境中先执行：  
+     `npm run test` 与 `npm run build`，确保测试与构建均通过。  
+   - 把本仓库用 GitHub 连接到 [Netlify](https://www.netlify.com/)，在 Netlify 中将 **Build command** 配置为 `npm run build`，**Publish directory** 配置为 `out`，**push 到 main 即自动构建并发布**，无需在项目里写部署脚本。
 
 ## 项目结构
 
@@ -41,3 +43,5 @@
 ## 建议 Node 版本
 
 Next.js 16 与当前 Vitest 推荐 **Node.js >= 20**。若本地为 Node 18，可 `nvm use 20` 或升级 Node 后再 `npm install` 与 `npm run test`。
+
+（本行用于测试自动部署，可根据需要删除。）
