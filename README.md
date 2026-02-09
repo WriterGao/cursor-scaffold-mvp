@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cursor 自然语言全流程脚手架（MVP）
 
-## Getting Started
+用 **自然语言** 描述需求，由 Cursor 按规范完成：需求设计 → 方案设计 → 代码实现 → 测试 → 提交准备 → 发布。
 
-First, run the development server:
+## 技术栈（首轮固定）
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js 全栈**（App Router + API Routes）+ TypeScript + Tailwind
+- **测试**：Vitest + React Testing Library
+- **部署**：Netlify（连 GitHub 即自动部署）
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 怎么用
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **在 Cursor 里用自然语言提需求**  
+   例如：「做一个待办列表，能增删改查，要能部署到网上。」
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **让 Cursor 按全流程执行**  
+   项目已配置 `.cursor/rules/`，Agent 会按顺序：
+   - 先写 `docs/requirements.md`（需求）
+   - 再写 `docs/design.md`（方案）
+   - 再按 design 实现代码
+   - 写测试并跑 `npm run test` 通过
+   - 生成 Conventional Commit 信息（并可执行 commit）
 
-## Learn More
+3. **本地开发**
+   ```bash
+   npm install   # 若未安装依赖
+   npm run dev   # 开发
+   npm run test  # 测试
+   npm run build # 构建
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **发布**  
+   把本仓库用 GitHub 连接到 [Netlify](https://www.netlify.com/)，在 Netlify 中配置构建命令（例如 `npm run build && npx next export`）和发布目录 `out`，**push 到 main 即自动构建并发布**，无需在项目里写部署脚本。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 项目结构
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `.cursor/rules/`：全流程、Next.js、提交约定（Cursor 必读）
+- `docs/requirements.md`、`docs/design.md`：需求与方案（由 Cursor 按需求填写）
+- `app/`：页面与 API（Next.js App Router）
 
-## Deploy on Vercel
+## 建议 Node 版本
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js 16 与当前 Vitest 推荐 **Node.js >= 20**。若本地为 Node 18，可 `nvm use 20` 或升级 Node 后再 `npm install` 与 `npm run test`。
