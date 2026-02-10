@@ -71,7 +71,7 @@ export default function Home() {
           <div className="rounded-3xl border border-zinc-200/80 bg-white/90 px-6 py-8 shadow-xl shadow-zinc-200/50 backdrop-blur-sm dark:border-zinc-700/80 dark:bg-zinc-900/90 dark:shadow-none">
             <header className="mb-6 flex flex-col gap-3">
               <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-                待办列表
+                待办列表 <span aria-hidden>😊</span>
               </h1>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 先写下你今天想完成的事情吧。
