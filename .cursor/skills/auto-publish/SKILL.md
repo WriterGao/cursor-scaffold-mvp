@@ -56,4 +56,5 @@ description: Runs test and build, then commits and pushes to main to trigger Net
 ## 与本项目规则的关系
 
 - 提交格式与发布前检查以 `.cursor/rules/02-commit.md` 为准。  
-- 全流程顺序与「自动发布模式」以 `.cursor/rules/00-full-flow.md` 为准；本 Skill 保证在用户说出触发短语时，Agent 必定按上述步骤执行并实际运行命令，而不是只输出说明。
+- 全流程顺序与「自动发布模式」以 `.cursor/rules/00-full-flow.md` 为准；本 Skill 保证在用户说出触发短语时，Agent 必定按上述步骤执行并实际运行命令，而不是只输出说明。  
+- push 到 main 后，除 Netlify 自动部署外，GitHub Actions 会在配置好 Secrets 时将产物部署到自建服务器（见 `.github/workflows/deploy-self-hosted.yml`）。

@@ -1,0 +1,23 @@
+# 自建服务器 Nginx 配置示例
+# 用法：复制到服务器 /etc/nginx/sites-available/ 或 conf.d/，修改 root 路径后 nginx -s reload
+# Docker 内默认已提供静态托管，仅自建直托 out/ 时使用本配置
+
+server {
+    listen 80;
+    server_name _;
+    root /var/www/cursor-scaffold-mvp;  # 改为你的 out/ 部署目录
+    index index.html;
+
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+    gzip_min_length 256;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~* \.(js|css|ico|png|jpg|jpeg|gif|svg|woff2?)$ {
+        expires 7d;
+        add_header Cache-Control "public, immutable";
+    }
+}

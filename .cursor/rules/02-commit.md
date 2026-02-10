@@ -39,6 +39,7 @@
   - 将本仓库通过 GitHub 连接到 Netlify。
   - 在 Netlify 中将 **Build command** 配置为 `npm run build`，将 **Publish directory** 配置为 `out`。
   - 之后 **push 到 main 分支即自动构建并发布**。
+- **自建服务器**：push 到 main 后，除 Netlify 外，GitHub Actions（`.github/workflows/deploy-self-hosted.yml`）会在配置好仓库 Secrets 的前提下，将构建产物部署到自建服务器。详见 `docs/deploy-self-hosted.md`。
 - 无需在仓库内写部署脚本；仅需在 Netlify 控制台用 GitHub 导入本项目并按上述方式配置即可。
 
 ## 自动发布触发条件

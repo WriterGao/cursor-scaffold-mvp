@@ -39,13 +39,18 @@
 4. **发布**  
    - 本地在 **Node.js >= 20.9.0** 的环境中先执行：  
      `npm run test` 与 `npm run build`，确保测试与构建均通过。  
-   - 把本仓库用 GitHub 连接到 [Netlify](https://www.netlify.com/)，在 Netlify 中将 **Build command** 配置为 `npm run build`，**Publish directory** 配置为 `out`，**push 到 main 即自动构建并发布**，无需在项目里写部署脚本。
+   - **Netlify**：把本仓库用 GitHub 连接到 [Netlify](https://www.netlify.com/)，在 Netlify 中将 **Build command** 配置为 `npm run build`，**Publish directory** 配置为 `out`，push 到 main 即自动构建并发布。  
+   - **自建服务器**：在服务器用 Nginx 托管 `out/`，可用本地脚本 `deploy/rsync-deploy.sh` 同步，或由 GitHub Actions 在 push 到 main 时自动部署（需配置仓库 Secrets）。详见 [docs/deploy-self-hosted.md](docs/deploy-self-hosted.md)。  
+   - **Docker**：`docker build -t cursor-scaffold-mvp .` 后 `docker run -p 3000:80 cursor-scaffold-mvp`，或使用 `docker compose up -d`。详见 [docs/deploy-self-hosted.md](docs/deploy-self-hosted.md)。  
+   - 自建/Docker 构建需 Node ≥20.9.0；运行时仅需 Nginx（或 Docker 内 Nginx），无需 Node。
 
 ## 项目结构
 
 - `.cursor/rules/`：全流程、Next.js、提交约定（Cursor 必读）
 - `.cursor/skills/auto-publish/`：自动发布 Skill（说「自动发布到线上」或「推送代码」时由 Agent 执行测试→构建→提交→push）
-- `docs/requirements.md`、`docs/design.md`：需求与方案（由 Cursor 按需求填写）
+- `docs/`：需求与方案、[自建/Docker 部署说明](docs/deploy-self-hosted.md)
+- `deploy/`：Nginx 配置示例、rsync 部署脚本
+- `.github/workflows/`：自建服务器 CI/CD（push 到 main 时构建并可选部署）
 - `app/`：页面与 API（Next.js App Router）
 
 ## 建议 Node 版本

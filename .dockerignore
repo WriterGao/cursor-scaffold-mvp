@@ -1,0 +1,40 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# build output (will be generated in container)
+.next
+out
+build
+
+# git
+.git
+.gitignore
+
+# tests and tooling (not needed for build)
+**/*.test.*
+**/*.spec.*
+coverage
+vitest.config.ts
+vitest.setup.ts
+
+# misc
+.DS_Store
+*.pem
+.env*
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# docs and deploy scripts (not needed inside image)
+docs
+.cursor
+README.md
+*.md
+!package.json

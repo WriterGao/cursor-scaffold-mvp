@@ -163,6 +163,20 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* 底部一整行笑脸 */}
+      <div
+        className="w-full overflow-x-auto border-t border-zinc-200/60 py-4 dark:border-zinc-700/60"
+        aria-hidden
+      >
+        <div className="flex min-w-max justify-center gap-1 px-4 text-2xl">
+          {Array.from({ length: 50 }, (_, i) => (
+            <span key={i} className="select-none">
+              😊
+            </span>
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
