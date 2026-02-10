@@ -1,6 +1,6 @@
- "use client";
+"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Todo = {
   id: string;
@@ -11,6 +11,15 @@ type Todo = {
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState("");
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleAdd = () => {
     const text = input.trim();
@@ -49,6 +58,9 @@ export default function Home() {
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             先写下你今天想完成的事情吧。
+          </p>
+          <p className="text-xs text-zinc-400 dark:text-zinc-500">
+            当前时间：{now.toLocaleString()}
           </p>
         </header>
 

@@ -21,6 +21,13 @@
    - 写测试并跑 `npm run test` 通过
    - 生成 Conventional Commit 信息（并可执行 commit）
 
+3. **一键自动发布（可选）**  
+   若你在需求中补充类似语句：
+   - 「改完之后自动发布」
+   - 「自动发布到线上」
+   - 「这次改完帮我直接发布」  
+   则 Agent 会在测试与构建（`npm run test`、`npm run build`）全部通过后，自动执行 `git add`、`git commit`、`git push origin main`，由 Netlify 完成部署。
+
 3. **本地开发**
    ```bash
    npm install   # 若未安装依赖
@@ -37,6 +44,7 @@
 ## 项目结构
 
 - `.cursor/rules/`：全流程、Next.js、提交约定（Cursor 必读）
+- `.cursor/skills/auto-publish/`：自动发布 Skill（说「自动发布到线上」或「推送代码」时由 Agent 执行测试→构建→提交→push）
 - `docs/requirements.md`、`docs/design.md`：需求与方案（由 Cursor 按需求填写）
 - `app/`：页面与 API（Next.js App Router）
 
