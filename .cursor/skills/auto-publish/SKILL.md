@@ -16,16 +16,25 @@ description: Runs test and build, then commits and pushes to main to trigger Net
 
 ## 执行流程（必须按顺序）
 
-1. **环境检查**  
-   - 执行 `node -v`。若版本 &lt; 20.9.0，先提示用户在本机执行 `nvm use 20` 或升级 Node 至 ≥20.9.0，再继续；若无法切换环境则停止，不执行 push。
-   - 若版本 ≥20.9.0，继续下一步。
+1. **环境检查与切换**  
+   - 执行 `node -v`。
+   - 若版本 **≥20.9.0**：直接继续下一步，构建时执行 `npm run build` 即可。
+   - 若版本 **&lt; 20.9.0**：先在本会话中尝试切换环境，执行：
+     ```bash
+     source ~/.nvm/nvm.sh 2>/dev/null && nvm use 20 && node -v
+     ```
+     若输出为 `v20.x.x`，视为可切换，**后续构建必须**在带 nvm 的命令中执行（见第 3 步）。若 nvm 不可用或命令失败、仍非 20.x，则提示用户在本机执行 `nvm use 20` 或升级 Node，并停止、不执行 push。
 
 2. **测试**  
    - 执行 `npm run test`。  
    - 若失败：修复测试或代码直至通过，再继续；**不得在测试未通过时提交或 push**。
 
 3. **构建**  
-   - 执行 `npm run build`。  
+   - 若当前环境 Node 已 ≥20.9.0：执行 `npm run build`。
+   - 若当前环境 Node &lt; 20.9.0 或曾依赖 nvm 切换：执行以下命令，确保用 Node 20 构建：
+     ```bash
+     source ~/.nvm/nvm.sh 2>/dev/null && nvm use 20 && npm run build
+     ```
    - 若失败：修复构建错误直至通过，再继续；**不得在构建未通过时 push**。
 
 4. **提交与推送**  
