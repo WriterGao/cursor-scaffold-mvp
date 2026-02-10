@@ -164,19 +164,21 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 底部一整行笑脸 */}
-      <div
-        className="w-full overflow-x-auto border-t border-zinc-200/60 py-4 dark:border-zinc-700/60"
+      {/* 底部笑脸装饰 */}
+      <footer
+        className="mt-auto w-full border-t border-zinc-200/60 py-5 dark:border-zinc-700/60"
         aria-hidden
       >
-        <div className="flex min-w-max justify-center gap-1 px-4 text-2xl">
-          {Array.from({ length: 50 }, (_, i) => (
-            <span key={i} className="select-none">
-              😊
-            </span>
-          ))}
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 px-4 text-xl text-zinc-400 dark:text-zinc-500">
+          {["😊", "🙂", "😊", "🙂", "😊", "🙂", "😊", "🙂", "😊"].map(
+            (emoji, i) => (
+              <span key={i} className="select-none">
+                {emoji}
+              </span>
+            ),
+          )}
         </div>
-      </div>
+      </footer>
     </main>
   );
 }
